@@ -1,19 +1,53 @@
-import React, {useState} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import Header from './components/layout/Header';
 import NotesList from './components/NotesList';
+import {v4 as uuidv4} from 'uuid';
 
-export default function App() {
-  const [notes, setNotes] = useState([{id: 1, name: "Note 1", content: "Content 1"}]);
-  return (
-    <div>
-      <div className="container">
-        <>
-          <h1>Enter a new note!</h1>
-          <input type="text" name="" id=""/>
-          <textarea name="" id="" cols="30" rows="10"></textarea>
-          <button type="submit">Submit!</button>
-          <NotesList notes = {notes} />
-        </>
-      </div>
-    </div>
+const LOCAL_STORAGE_KEY = "notesApp.notes";
+
+export function App() {
+  const [notes, setNotes] = useState([{id: 1, name: "Note 1", content: "Note 1 Content"}])
+  const noteNameRef = useRef()
+  const noteContentRef = useRef()
+
+  useEffect(() => {
+    const storedNotes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    if (storedNotes) setNotes(storedNotes)
+  }, []) //store current notes
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes))
+  }, [notes]) //get stored notes from local storage
+
+  function handleAddNote(e) {
+    const name = noteNameRef.current.value //grab name of input
+    const content = noteContentRef.current.value
+  
+    if (name === '' && content === '') return //if blank don't add
+    setNotes(prevNotes => {
+      return [...prevNotes, { id: uuidv4(), name: name, content: content}]
+    })
+    noteNameRef.current.value = null//empty input
+    noteContentRef.current.value = null
+  }
+
+  function handleClearNotes() {
+    setNotes([]); //clear all notes
+  }
+
+  return(
+    <>
+    <Header />
+    <NotesList notes = {notes} />
+    <input ref={noteNameRef} type="text" name="title" value={notes.name} />
+    <textarea ref={noteContentRef} value={notes.content} cols="30" rows="10" />
+    <button onClick={handleAddNote}>Add</button>
+    <button onClick={handleClearNotes}>Clear All</button>
+    </>
   )
 }
+
+export default App
+
+//future: add some sort of tag system - research this
+//future: filter by tag
