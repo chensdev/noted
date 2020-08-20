@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import NotesList from './components/NotesList';
 
 export default function App() {
-  const [notes, setNotes] = useState(['note 1', 'note 2']);
+  const [notes, setNotes] = useState([{id: 1, name: "Note 1", content: "Content 1"}]);
   return (
     <div>
       <div className="container">
