@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import NotesList from './components/NotesList';
 
-function App() {
+export default function App() {
+  const [notes, setNotes] = useState(['note 1', 'note 2']);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="container">
+        <>
+          <h1>Enter a new note!</h1>
+          <input type="text" name="" id=""/>
+          <textarea name="" id="" cols="30" rows="10"></textarea>
+          <button type="submit">Submit!</button>
+          <NotesList notes = {notes} />
+        </>
+      </div>
     </div>
-  );
+  )
 }
-
-export default App;
