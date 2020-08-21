@@ -5,6 +5,8 @@ export default function Note({note}) {
         <div>
             {note.name} {': '}
             {note.content}
+            <button>Del</button>
+            <button>Arc</button>
         </div>
     )
 }
