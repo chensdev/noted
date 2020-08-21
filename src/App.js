@@ -36,14 +36,18 @@ export function App() {
   }
 
   return(
-    <>
-    <Header />
-    <NotesList notes = {notes} />
-    <input ref={noteNameRef} type="text" name="title" value={notes.name} />
-    <textarea ref={noteContentRef} value={notes.content} cols="30" rows="10" />
-    <button onClick={handleAddNote}>Add</button>
-    <button onClick={handleClearNotes}>Clear All</button>
-    </>
+    <div className="container">
+      <>
+      <Header className = "header"/>
+      <NotesList notes = {notes} />
+      <div className="note-container">
+        <input ref={noteNameRef} type="text" name="title" value={notes.name} />
+        <textarea ref={noteContentRef} value={notes.content} cols="30" rows="10" />
+        <button onClick={handleAddNote}>Add</button>
+        <button onClick={handleClearNotes}>Clear All</button>
+        </div>
+      </>
+    </div>
   )
 }
 
