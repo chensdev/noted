@@ -1,11 +1,15 @@
-import React from 'react';
-import Note from './Note';
+import React, { Component } from 'react'
 
-export default function NotesList({notes}) {
-    return (
-        notes.map(note => {
-            return <Note key={note.id} note={note} />
-        })
-    )
+export class NotesList extends Component {
+    render() {
+        return (
+            <ul>
+                {this.props.items.map(item => (
+                    <div key = {item.id}>{item.title}{': '}{item.content}</div>
+                ))}
+            </ul>
+        )
+    }
 }
 
+export default NotesList;

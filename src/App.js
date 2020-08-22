@@ -1,59 +1,70 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/layout/Header';
 import NotesList from './components/NotesList';
 import {v4 as uuidv4} from 'uuid';
 
 const LOCAL_STORAGE_KEY = "notesApp.notes";
 
-export function App() {
-  const [notes, setNotes] = useState([])
-  const noteNameRef = useRef()
-  const noteContentRef = useRef()
-
-  useEffect(() => {
-    const storedNotes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-    if (storedNotes) setNotes(storedNotes)
-  }, []) //store current notes
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes))
-  }, [notes]) //get stored notes from local storage
-
-  function handleAddNote(e) {
-    const name = noteNameRef.current.value //grab name of input
-    const content = noteContentRef.current.value
-  
-    if (name === '' && content === '') return //if blank don't add
-    setNotes(prevNotes => {
-      return [...prevNotes, { id: uuidv4(), name: name, content: content}]
-    })
-    noteNameRef.current.value = null//empty input
-    noteContentRef.current.value = null
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {notes: [], text: ''};
+    this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangeContent = this.handleChangeContent.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  function handleClearNotes() {
-    setNotes([]); //clear all notes
+  handleChangeTitle(e) {
+    this.setState({ title: e.target.value });
   }
 
-  return(
-    <div className="container">
-      <>
-      <Header className = "header"/>
-      <NotesList notes = {notes} />
-      <div className="note-container">
-        <form>
-          <input ref={noteNameRef} type="text" name="title" value={notes.name} />
-          <textarea ref={noteContentRef} value={notes.content} name="content" cols="30" rows="10" />
-          <button onClick={handleAddNote}>Add</button>
-          <button onClick={handleClearNotes}>Clear All</button>
-        </form>
+  handleChangeContent(e) {
+    this.setState({ content: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.title.length === 0 || this.state.content.length === 0) {
+      return;
+    }
+    const newNote = {
+      id: uuidv4(),
+      title: this.state.title,
+      content: this.state.content
+    };
+    this.setState(state => ({
+      notes: state.notes.concat(newNote),
+      text: ''
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <Header />
         </div>
-      </>
-    </div>
-  )
+        <h3>Remember, remember...</h3>
+        <NotesList items = {this.state.notes} />
+        <form onSubmit = {this.handleSubmit}>
+          <input 
+            id = "new-note"
+            onChange = {this.handleChangeTitle}
+            value = {this.state.title} 
+          />
+          <textarea 
+            id="new-note"
+            onChange = {this.handleChangeContent}
+            value = {this.state.content}
+          />
+          <button>submit!</button>
+        </form>
+      </div>
+    )
+  }
 }
 
-export default App
+export default App;
 
 //future: add some sort of tag system - research this
 //future: filter by tag
