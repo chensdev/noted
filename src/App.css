@@ -1,14 +1,24 @@
 .container {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 1500px;
+    margin: 40px auto;
     text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    background: tan;
+    border-radius: 30px;
+    border: 5px solid brown;
 }
 
 .note-form {
-    padding: 10px 0;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    max-width: 200px;
-    margin: 0 auto;
     justify-items: center;
+}
+
+form button {
+    width: 200px;
+    margin: 10px auto;
+    padding: 10px 5px;
+    border-radius: 5px;
 }

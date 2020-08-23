@@ -50,25 +50,29 @@ class App extends React.Component {
   render() {
     return (
       <div className = "App">
+        <header>
+          <Header />
+        </header>
         <div className="container">
-          <div className = "header">
-            <Header />
+          <div className="app-left">
+            <h3 className = "title">Remember, remember...</h3>
+            <form className = "note-form" onSubmit = {this.handleSubmit}>
+              <input 
+                id = "note-title"
+                onChange = {this.handleChangeTitle}
+                value = {this.state.title} 
+              />
+              <textarea 
+                id= "note-content"
+                onChange = {this.handleChangeContent}
+                value = {this.state.content}
+              />
+              <button>submit!</button>
+            </form>
           </div>
-          <h3 className = "title">Remember, remember...</h3>
-          <NotesList notes = {this.state.notes} handleDelete = {this.handleDelete} handleArchive = {this.handleArchive}/>
-          <form className = "note-form" onSubmit = {this.handleSubmit}>
-            <input 
-              id = "note-title"
-              onChange = {this.handleChangeTitle}
-              value = {this.state.title} 
-            />
-            <textarea 
-              id= "note-content"
-              onChange = {this.handleChangeContent}
-              value = {this.state.content}
-            />
-            <button>submit!</button>
-          </form>
+          <div className="app-right">
+            <NotesList notes = {this.state.notes} handleDelete = {this.handleDelete} handleArchive = {this.handleArchive}/>
+          </div>
         </div>
       </div>
     )
