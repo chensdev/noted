@@ -1,11 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export class NotesList extends Component {
     render() {
         return (
             <ul>
-                {this.props.items.map(item => (
-                    <div key = {item.id}>{item.title}{': '}{item.content}</div>
+                {this.props.notes.map(note => (
+                    <div key = {note.id}>
+                        <div>{note.title}{': '}{note.content}</div>
+                        <button onClick = {this.props.handleDelete.bind(this, note.id)}>del</button>
+                        <button onClick = {this.props.handleArchive.bind(this, note)}>arc</button>
+                    </div>
                 ))}
             </ul>
         )

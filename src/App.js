@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from './components/layout/Header';
 import NotesList from './components/NotesList';
 import {v4 as uuidv4} from 'uuid';
-
-const LOCAL_STORAGE_KEY = "notesApp.notes";
+import './App.css'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {notes: [], text: ''};
+    this.state = {notes: [], id:'', title:'', content:''};
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeContent = this.handleChangeContent.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,31 +33,43 @@ class App extends React.Component {
     };
     this.setState(state => ({
       notes: state.notes.concat(newNote),
-      text: ''
+      id:'',
+      title: '',
+      content: ''
     }));
+  }
+
+  handleDelete= id => {
+    this.setState({notes: [...this.state.notes.filter(note => note.id !== id)]})
+  }
+
+  handleArchive(e) {
+    alert("Archived!")
   }
 
   render() {
     return (
-      <div>
-        <div>
-          <Header />
+      <div className = "App">
+        <div className="container">
+          <div className = "header">
+            <Header />
+          </div>
+          <h3 className = "title">Remember, remember...</h3>
+          <NotesList notes = {this.state.notes} handleDelete = {this.handleDelete} handleArchive = {this.handleArchive}/>
+          <form className = "note-form" onSubmit = {this.handleSubmit}>
+            <input 
+              id = "note-title"
+              onChange = {this.handleChangeTitle}
+              value = {this.state.title} 
+            />
+            <textarea 
+              id= "note-content"
+              onChange = {this.handleChangeContent}
+              value = {this.state.content}
+            />
+            <button>submit!</button>
+          </form>
         </div>
-        <h3>Remember, remember...</h3>
-        <NotesList items = {this.state.notes} />
-        <form onSubmit = {this.handleSubmit}>
-          <input 
-            id = "new-note"
-            onChange = {this.handleChangeTitle}
-            value = {this.state.title} 
-          />
-          <textarea 
-            id="new-note"
-            onChange = {this.handleChangeContent}
-            value = {this.state.content}
-          />
-          <button>submit!</button>
-        </form>
       </div>
     )
   }
