@@ -20,8 +20,15 @@ code {
 
 header {
   background: rgb(0, 59, 151);
+  color: white;
   border-bottom: 3px solid white;
   box-shadow: -5px -20px 15px 24px black;
+}
+
+header div {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
 }
 
 body {
