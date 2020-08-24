@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Bin() {
     return (
-        <div>
+        <div className="container">
             <h1>Bin</h1>
         </div>
     )
