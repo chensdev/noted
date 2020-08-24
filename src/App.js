@@ -44,7 +44,7 @@ class App extends React.Component {
   }
 
   handleArchive(e) {
-    alert("Archived!")
+    
   }
 
   render() {
