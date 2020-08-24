@@ -1,5 +1,5 @@
 # Noted!
-Noted is a React notes app where you can store titled notes. Still in very early stages.
+Noted is a React notes app where you can store titled notes.
 # Features
   - Add notes with title
   - Delete notes
