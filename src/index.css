@@ -19,11 +19,13 @@ code {
 }
 
 header {
-  background: rgb(68, 136, 136);
+  background: rgb(0, 59, 151);
+  border-bottom: 3px solid white;
+  box-shadow: -5px -20px 15px 24px black;
 }
 
 body {
-  background: rgb(202, 202, 180);
+  background: rgb(219, 219, 219);
 }
 
 .App {

@@ -67,7 +67,7 @@ class App extends React.Component {
                 onChange = {this.handleChangeContent}
                 value = {this.state.content}
               />
-              <button>submit!</button>
+              <button className = "btn btn-lg">submit!</button>
             </form>
           </div>
           <div className="app-right">

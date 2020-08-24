@@ -6,7 +6,8 @@
     justify-content: space-evenly;
     background: tan;
     border-radius: 30px;
-    border: 5px solid brown;
+    border: 5px solid white;
+    box-shadow: 0px 3px 10px -3px black, inset 0px 0px 10px -2px black;
 }
 
 .note-form {
@@ -16,9 +17,65 @@
     justify-items: center;
 }
 
-form button {
-    width: 200px;
+.note-form input {
+    padding: 5px;
+    border: 0px;
+        border-bottom-color: currentcolor;
+        border-bottom-style: none;
+        border-bottom-width: 0px;
+    border-bottom: 1px solid lightgray;
+}
+
+.note-form textarea {
+    border: 0px;
+        border-bottom-color: currentcolor;
+        border-bottom-style: none;
+        border-bottom-width: 0px;
+    padding: 5px;
+    height: 300px;
+}
+
+.note {
+    background: white;
+    max-width: 700px;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: left;
+}
+
+.btn {
+    border: none;
+    color: white;
+    background: rgb(51, 51, 51);
+    box-shadow: 0px 1px 2px 1px black, inset 0px 2px 4px 0px whitesmoke;
+}
+
+.btn:hover {
+    color: lightgray;
+    background: rgb(41, 41, 41);
+    box-shadow: 0px 0px 1px 1px black, inset 0px 0px 4px 0px black;
+    padding-bottom: 10.01px;
+}
+
+.btn-lg {
+    width: 100px;
     margin: 10px auto;
     padding: 10px 5px;
     border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn-sm {
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.btn-array {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.btn-array > .btn-sm {
+    margin-right: 10px;
 }
